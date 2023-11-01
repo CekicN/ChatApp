@@ -1,0 +1,57 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "ChatApp/1.0.0": {
+        "dependencies": {
+          "Guna.UI2.WinForms": "2.0.1.4",
+          "Siticone.Desktop.UI": "2.1.1"
+        },
+        "runtime": {
+          "ChatApp.dll": {}
+        }
+      },
+      "Guna.UI2.WinForms/2.0.1.4": {
+        "runtime": {
+          "lib/net40/Guna.UI2.dll": {
+            "assemblyVersion": "2.0.1.4",
+            "fileVersion": "2.0.1.4"
+          }
+        }
+      },
+      "Siticone.Desktop.UI/2.1.1": {
+        "runtime": {
+          "lib/net40/Siticone.Desktop.UI.dll": {
+            "assemblyVersion": "2.1.1.0",
+            "fileVersion": "2.1.1.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ChatApp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Guna.UI2.WinForms/2.0.1.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UOSLx1Iy8MoypqX6PNS/GRSy/u59lVTSaM4c9+jpU7YN+rnbhCzIIJlpnRF/m+1crElNpzqNWT5Sy5B+Z6usyg==",
+      "path": "guna.ui2.winforms/2.0.1.4",
+      "hashPath": "guna.ui2.winforms.2.0.1.4.nupkg.sha512"
+    },
+    "Siticone.Desktop.UI/2.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ra7IVuwB11Q2yCo541FcPFmcxDyY7TSUmGg2ddbf+rNN18NrPXJ2CKMY0ZbuL+JRIig/jrJcU7ymJHfxKnEWvw==",
+      "path": "siticone.desktop.ui/2.1.1",
+      "hashPath": "siticone.desktop.ui.2.1.1.nupkg.sha512"
+    }
+  }
+}
