@@ -45,6 +45,11 @@ namespace ChatApp.ChatItems
         {
             AdjustHeight();
         }
+
+        private void Outgoing_DockChanged(object sender, EventArgs e)
+        {
+            AdjustHeight();
+        }
     }
 
 

@@ -50,13 +50,16 @@ namespace ChatApp
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            if(txtMessage.Text != "")
-            {
-                addOutgoing(txtMessage.Text);
-                txtMessage.Text = string.Empty;
-            }
+            send();
         }
 
+        void send()
+        {
+            if (txtMessage.Text.Trim().Length == 0) return;
+
+            addOutgoing(txtMessage.Text);
+            txtMessage.Text = string.Empty;
+        }
         void addIncomming(string msg)
         {
             var bubble = new ChatItems.Incomming();
@@ -72,6 +75,14 @@ namespace ChatApp
             bubble.BringToFront();
             bubble.Dock = DockStyle.Top;
             bubble.Message = msg;
+        }
+
+        private void txtMessage_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Return)
+            {
+                send();
+            }
         }
     }
 }
