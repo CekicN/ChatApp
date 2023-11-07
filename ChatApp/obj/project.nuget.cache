@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "o7M+kQVk/enh18zdAmG2JIYT1/RXXJ68V2+j7phzdhh6FhF+v9HcoAu47IOi2pHXfGl1Vmy5Lno41f/+TL7sHw==",
+  "dgSpecHash": "06A7ms9IzC3b6IJ8wHP53zmcSdD+BID2wFkIN1e/n/tZHhfa2lAC9rBskoy2V/cP/2gQpnQkZpjaiIDU+Rrydw==",
   "success": true,
   "projectFilePath": "D:\\Faks\\4.godina\\Zastita Informacija\\ChatApp\\ChatApp\\ChatApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nikola\\.nuget\\packages\\guna.ui2.winforms\\2.0.1.4\\guna.ui2.winforms.2.0.1.4.nupkg.sha512",
-    "C:\\Users\\Nikola\\.nuget\\packages\\siticone.desktop.ui\\2.1.1\\siticone.desktop.ui.2.1.1.nupkg.sha512"
+    "C:\\Users\\Nikola\\.nuget\\packages\\siticone.desktop.ui\\2.1.1\\siticone.desktop.ui.2.1.1.nupkg.sha512",
+    "C:\\Users\\Nikola\\.nuget\\packages\\system.reactive\\6.0.0\\system.reactive.6.0.0.nupkg.sha512",
+    "C:\\Users\\Nikola\\.nuget\\packages\\system.reactive.core\\6.0.0\\system.reactive.core.6.0.0.nupkg.sha512",
+    "C:\\Users\\Nikola\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512"
   ],
   "logs": [
     {

@@ -21,3 +21,6 @@ D:\Faks\4.godina\Zastita Informacija\ChatApp\ChatApp\bin\Debug\net6.0-windows\Gu
 D:\Faks\4.godina\Zastita Informacija\ChatApp\ChatApp\bin\Debug\net6.0-windows\Siticone.Desktop.UI.dll
 D:\Faks\4.godina\Zastita Informacija\ChatApp\ChatApp\obj\Debug\net6.0-windows\ChatApp.ChatItems.Incomming.resources
 D:\Faks\4.godina\Zastita Informacija\ChatApp\ChatApp\obj\Debug\net6.0-windows\ChatApp.ChatItems.Outgoing.resources
+D:\Faks\4.godina\Zastita Informacija\ChatApp\ChatApp\obj\Debug\net6.0-windows\ChatApp.Form2.resources
+D:\Faks\4.godina\Zastita Informacija\ChatApp\ChatApp\bin\Debug\net6.0-windows\System.Reactive.dll
+D:\Faks\4.godina\Zastita Informacija\ChatApp\ChatApp\bin\Debug\net6.0-windows\System.Reactive.Core.dll

@@ -31,9 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Incomming));
             this.siticoneCustomGradientPanel1 = new Siticone.Desktop.UI.WinForms.SiticoneCustomGradientPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.siticoneCirclePictureBox1 = new Siticone.Desktop.UI.WinForms.SiticoneCirclePictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.siticoneCustomGradientPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.siticoneCirclePictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // siticoneCustomGradientPanel1
@@ -46,9 +46,10 @@
             this.siticoneCustomGradientPanel1.FillColor = System.Drawing.Color.Blue;
             this.siticoneCustomGradientPanel1.FillColor2 = System.Drawing.Color.DeepSkyBlue;
             this.siticoneCustomGradientPanel1.FillColor4 = System.Drawing.Color.DodgerBlue;
-            this.siticoneCustomGradientPanel1.Location = new System.Drawing.Point(71, 5);
+            this.siticoneCustomGradientPanel1.Location = new System.Drawing.Point(62, 4);
+            this.siticoneCustomGradientPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.siticoneCustomGradientPanel1.Name = "siticoneCustomGradientPanel1";
-            this.siticoneCustomGradientPanel1.Size = new System.Drawing.Size(220, 93);
+            this.siticoneCustomGradientPanel1.Size = new System.Drawing.Size(192, 70);
             this.siticoneCustomGradientPanel1.TabIndex = 2;
             // 
             // label1
@@ -58,36 +59,34 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(12, 11);
+            this.label1.Location = new System.Drawing.Point(10, 8);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(195, 72);
+            this.label1.Size = new System.Drawing.Size(171, 54);
             this.label1.TabIndex = 0;
             this.label1.Text = "Hello";
             // 
-            // siticoneCirclePictureBox1
+            // pictureBox1
             // 
-            this.siticoneCirclePictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.siticoneCirclePictureBox1.ImageRotate = 0F;
-            this.siticoneCirclePictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("siticoneCirclePictureBox1.InitialImage")));
-            this.siticoneCirclePictureBox1.Location = new System.Drawing.Point(15, 8);
-            this.siticoneCirclePictureBox1.Name = "siticoneCirclePictureBox1";
-            this.siticoneCirclePictureBox1.ShadowDecoration.Mode = Siticone.Desktop.UI.WinForms.Enums.ShadowMode.Circle;
-            this.siticoneCirclePictureBox1.Size = new System.Drawing.Size(53, 53);
-            this.siticoneCirclePictureBox1.TabIndex = 3;
-            this.siticoneCirclePictureBox1.TabStop = false;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(13, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(46, 46);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
             // 
             // Incomming
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.siticoneCirclePictureBox1);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.siticoneCustomGradientPanel1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Incomming";
-            this.Size = new System.Drawing.Size(345, 117);
+            this.Size = new System.Drawing.Size(302, 88);
             this.Resize += new System.EventHandler(this.Incomming_Resize);
             this.siticoneCustomGradientPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.siticoneCirclePictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -96,6 +95,6 @@
 
         private Siticone.Desktop.UI.WinForms.SiticoneCustomGradientPanel siticoneCustomGradientPanel1;
         private Label label1;
-        private Siticone.Desktop.UI.WinForms.SiticoneCirclePictureBox siticoneCirclePictureBox1;
+        private PictureBox pictureBox1;
     }
 }

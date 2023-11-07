@@ -36,6 +36,8 @@
             this.txtMessage = new Siticone.Desktop.UI.WinForms.SiticoneTextBox();
             this.siticoneSeparator1 = new Siticone.Desktop.UI.WinForms.SiticoneSeparator();
             this.panelContainer = new System.Windows.Forms.Panel();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.closeButton)).BeginInit();
             this.siticonePanel1.SuspendLayout();
@@ -49,7 +51,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(323, 79);
+            this.panel1.Size = new System.Drawing.Size(378, 79);
             this.panel1.TabIndex = 0;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
@@ -61,10 +63,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.closeButton.Image = ((System.Drawing.Image)(resources.GetObject("closeButton.Image")));
-            this.closeButton.Location = new System.Drawing.Point(287, 8);
+            this.closeButton.Location = new System.Drawing.Point(339, 8);
             this.closeButton.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(27, 25);
+            this.closeButton.Size = new System.Drawing.Size(30, 29);
             this.closeButton.TabIndex = 0;
             this.closeButton.TabStop = false;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
@@ -75,10 +77,10 @@
             this.siticonePanel1.Controls.Add(this.txtMessage);
             this.siticonePanel1.Controls.Add(this.siticoneSeparator1);
             this.siticonePanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.siticonePanel1.Location = new System.Drawing.Point(0, 447);
+            this.siticonePanel1.Location = new System.Drawing.Point(0, 548);
             this.siticonePanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.siticonePanel1.Name = "siticonePanel1";
-            this.siticonePanel1.Size = new System.Drawing.Size(323, 63);
+            this.siticonePanel1.Size = new System.Drawing.Size(378, 63);
             this.siticonePanel1.TabIndex = 2;
             // 
             // btnSend
@@ -88,7 +90,7 @@
             this.btnSend.Image = ((System.Drawing.Image)(resources.GetObject("btnSend.Image")));
             this.btnSend.ImageOffset = new System.Drawing.Point(0, 0);
             this.btnSend.ImageRotate = 0F;
-            this.btnSend.Location = new System.Drawing.Point(268, 14);
+            this.btnSend.Location = new System.Drawing.Point(323, 14);
             this.btnSend.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSend.Name = "btnSend";
             this.btnSend.PressedState.ImageSize = new System.Drawing.Size(64, 64);
@@ -115,7 +117,7 @@
             this.txtMessage.PasswordChar = '\0';
             this.txtMessage.PlaceholderText = "Enter Message";
             this.txtMessage.SelectedText = "";
-            this.txtMessage.Size = new System.Drawing.Size(246, 40);
+            this.txtMessage.Size = new System.Drawing.Size(307, 40);
             this.txtMessage.Style = Siticone.Desktop.UI.WinForms.Enums.TextBoxStyle.Material;
             this.txtMessage.TabIndex = 1;
             this.txtMessage.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtMessage_KeyUp);
@@ -128,7 +130,7 @@
             this.siticoneSeparator1.Location = new System.Drawing.Point(0, 0);
             this.siticoneSeparator1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.siticoneSeparator1.Name = "siticoneSeparator1";
-            this.siticoneSeparator1.Size = new System.Drawing.Size(323, 9);
+            this.siticoneSeparator1.Size = new System.Drawing.Size(378, 9);
             this.siticoneSeparator1.TabIndex = 0;
             // 
             // panelContainer
@@ -138,15 +140,23 @@
             this.panelContainer.Location = new System.Drawing.Point(0, 79);
             this.panelContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelContainer.Name = "panelContainer";
-            this.panelContainer.Size = new System.Drawing.Size(323, 368);
+            this.panelContainer.Size = new System.Drawing.Size(378, 469);
             this.panelContainer.TabIndex = 3;
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            // 
+            // backgroundWorker2
+            // 
+            this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
-            this.ClientSize = new System.Drawing.Size(323, 510);
+            this.ClientSize = new System.Drawing.Size(378, 611);
             this.Controls.Add(this.panelContainer);
             this.Controls.Add(this.siticonePanel1);
             this.Controls.Add(this.panel1);
@@ -174,5 +184,7 @@
         private Siticone.Desktop.UI.WinForms.SiticoneTextBox txtMessage;
         private Siticone.Desktop.UI.WinForms.SiticoneSeparator siticoneSeparator1;
         private Panel panelContainer;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker2;
     }
 }
