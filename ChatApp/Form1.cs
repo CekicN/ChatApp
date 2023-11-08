@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 
 namespace ChatApp
 {
@@ -40,8 +41,8 @@ namespace ChatApp
                 listener.Start();
 
                 client = listener.AcceptTcpClient();
-                STR = new StreamReader(client.GetStream());
-                STW = new StreamWriter(client.GetStream());
+                STR = new StreamReader(client.GetStream(), Encoding.UTF8);
+                STW = new StreamWriter(client.GetStream(), Encoding.UTF8);
                 STW.AutoFlush = true;
                 backgroundWorker1.RunWorkerAsync();
                 backgroundWorker2.WorkerSupportsCancellation = true;
@@ -55,8 +56,8 @@ namespace ChatApp
                 try
                 {
                     client.Connect(IpEnd);
-                    STR = new StreamReader(client.GetStream());
-                    STW = new StreamWriter(client.GetStream());
+                    STR = new StreamReader(client.GetStream(), Encoding.UTF8);
+                    STW = new StreamWriter(client.GetStream(), Encoding.UTF8);
                     STW.AutoFlush = true;
                     backgroundWorker1.RunWorkerAsync();
                     backgroundWorker2.WorkerSupportsCancellation = true;
@@ -110,8 +111,8 @@ namespace ChatApp
         {
             if (txtMessage.Text.Trim().Length == 0) return;
 
-            STW.WriteLine(this.txtMessage.Text);
             addOutgoing(txtMessage.Text);
+            STW.WriteLine(this.txtMessage.Text);
             txtMessage.Text = string.Empty;
         }
         void addIncomming(string msg)
@@ -146,10 +147,14 @@ namespace ChatApp
                 try
                 {
                     receive = STR.ReadLine();
-                    this.BeginInvoke((MethodInvoker)delegate ()
+                    if(!string.IsNullOrEmpty(receive))
                     {
-                        addIncomming(receive);
-                    });
+                        panelContainer.Invoke((MethodInvoker)delegate ()
+                        {
+                            addIncomming(receive);
+
+                        });
+                    }
                     receive = "";
                 }
                 catch(Exception ex)
@@ -163,10 +168,13 @@ namespace ChatApp
         {
             if(client.Connected)
             {
-                this.BeginInvoke((MethodInvoker)delegate ()
+                if(txtMessage.Text.Trim().Length != 0)
                 {
-                    send();
-                });
+                    panelContainer.Invoke((MethodInvoker)delegate ()
+                    {
+                        send();
+                    });
+                }
             }
             else
             {
