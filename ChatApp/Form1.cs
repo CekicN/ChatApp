@@ -16,12 +16,15 @@ namespace ChatApp
         public string receive;
         public string TextToSend;
 
+        private Bifid bf;
         public Form1()
         {
             InitializeComponent();
             f2 = new Form2();
             f2.ButtonClicked += f2_buttonClicked;
             f2.ShowDialog();
+
+            bf = new Bifid();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -111,8 +114,9 @@ namespace ChatApp
         {
             if (txtMessage.Text.Trim().Length == 0) return;
 
+            string cryptMsg = bf.Encrypt(txtMessage.Text);
             addOutgoing(txtMessage.Text);
-            STW.WriteLine(this.txtMessage.Text);
+            STW.WriteLine(cryptMsg);
             txtMessage.Text = string.Empty;
         }
         void addIncomming(string msg)
@@ -151,6 +155,7 @@ namespace ChatApp
                     {
                         panelContainer.Invoke((MethodInvoker)delegate ()
                         {
+                            receive = bf.Decrypt(receive);
                             addIncomming(receive);
 
                         });
