@@ -155,6 +155,10 @@ namespace ChatApp
                     {
                         panelContainer.Invoke((MethodInvoker)delegate ()
                         {
+                            if(rjToggleButton1.Checked)
+                            {
+                                addIncomming(receive);
+                            }
                             receive = bf.Decrypt(receive);
                             addIncomming(receive);
 
@@ -187,6 +191,11 @@ namespace ChatApp
             }
 
             backgroundWorker2.CancelAsync();
+        }
+
+        private void rjToggleButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }
