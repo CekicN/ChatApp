@@ -1,7 +1,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-
+using System.Diagnostics;
 namespace ChatApp
 {
     public partial class Form1 : Form
@@ -10,13 +10,28 @@ namespace ChatApp
         private Point firstPoint;
         private Form2 f2;
 
+        //za poruke
         private TcpClient client;
         public StreamWriter STW;
         public StreamReader STR;
         public string receive;
-        public string TextToSend;
+
+        //za fajlove
+        private TcpClient fileClient;
+        public StreamReader fileSTR;
+        public StreamWriter fileSTW;
+        string t, n, rec, fileName;
+        byte[] data;
+        int size;
+
+        TcpClient file;
+        NetworkStream stream;
 
         private Bifid bf;
+        private OFB rc;
+        private byte[] key;
+        private string iv;
+
         public Form1()
         {
             InitializeComponent();
@@ -24,7 +39,11 @@ namespace ChatApp
             f2.ButtonClicked += f2_buttonClicked;
             f2.ShowDialog();
 
+            key = Encoding.UTF8.GetBytes("dnqtwjgqutlnubog");
+            iv = "qyvqlvmrbcyxgjsz";
             bf = new Bifid();
+            rc = new OFB(key);
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -47,7 +66,22 @@ namespace ChatApp
                 STR = new StreamReader(client.GetStream(), Encoding.UTF8);
                 STW = new StreamWriter(client.GetStream(), Encoding.UTF8);
                 STW.AutoFlush = true;
+
+                TcpListener fileListener = new TcpListener(IPAddress.Parse("127.0.0.1"), 5050);
+                fileListener.Start();
+                fileClient = fileListener.AcceptTcpClient();
+                fileSTR = new StreamReader(fileClient.GetStream(), Encoding.UTF8);
+                fileSTW = new StreamWriter(fileClient.GetStream(), Encoding.UTF8);
+                fileSTW.AutoFlush = true;
+
+                TcpListener fileLis = new TcpListener(IPAddress.Parse("127.0.0.1"), 5055);
+                fileLis.Start();
+                file = fileLis.AcceptTcpClient();
+                stream = file.GetStream();
+
+
                 backgroundWorker1.RunWorkerAsync();
+                receiveFile.RunWorkerAsync();
                 backgroundWorker2.WorkerSupportsCancellation = true;
             }
             else if (clickedBtn.Name == "button2")
@@ -62,7 +96,20 @@ namespace ChatApp
                     STR = new StreamReader(client.GetStream(), Encoding.UTF8);
                     STW = new StreamWriter(client.GetStream(), Encoding.UTF8);
                     STW.AutoFlush = true;
+
+
+                    fileClient = new TcpClient();
+                    fileClient.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5050));
+                    fileSTR = new StreamReader(fileClient.GetStream(), Encoding.UTF8);
+                    fileSTW = new StreamWriter(fileClient.GetStream(), Encoding.UTF8);
+                    fileSTW.AutoFlush = true;
+
+                    file = new TcpClient();
+                    file.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5055));
+                    stream = file.GetStream();
+
                     backgroundWorker1.RunWorkerAsync();
+                    receiveFile.RunWorkerAsync();
                     backgroundWorker2.WorkerSupportsCancellation = true;
                 }
                 catch(Exception ex)
@@ -113,11 +160,78 @@ namespace ChatApp
         void send()
         {
             if (txtMessage.Text.Trim().Length == 0) return;
+            string cryptMsg = "";
 
-            string cryptMsg = bf.Encrypt(txtMessage.Text);
+            if (BifidBtn.Checked)
+                cryptMsg = bf.Encrypt(txtMessage.Text);
+            else if (RCBtn.Checked)
+                cryptMsg = rc.Encrypt(txtMessage.Text, iv);
+
             addOutgoing(txtMessage.Text);
             STW.WriteLine(cryptMsg);
             txtMessage.Text = string.Empty;
+        }
+
+        void sendFileInfo()
+        {
+            if (n.Trim().Length == 0) return;
+
+            fileSTW.WriteLine(n);
+            fileName = n.Substring(0, n.IndexOf('|'));
+            addOutgoing(fileName);
+        }
+        void sendFile()
+        {
+
+            data = File.ReadAllBytes(t);
+
+            int bytesSent = 0;
+            int bytesLeft = data.Length;
+
+            int bufferSize = 1024;
+
+            while(bytesLeft > 0)
+            {
+                int curDataSize = Math.Min(bufferSize, bytesLeft);
+
+                stream.Write(data, bytesSent, curDataSize);
+
+                bytesSent += curDataSize;
+                bytesLeft -= curDataSize;
+            }
+            
+            file.Close();
+        }
+
+        void ReceiveFile()
+        {
+            int bytesLeft = size;
+            byte[] data = new byte[size];
+
+            int bufferSize = 1024;
+            int bytesRead = 0;
+
+            while (bytesLeft > 0)
+            {
+                int curDataSize = Math.Min(bufferSize, bytesLeft);
+                if (file.Available < curDataSize)
+                    curDataSize = file.Available;
+
+                stream.Read(data, bytesRead, curDataSize);
+
+                bytesRead += curDataSize;
+                bytesLeft -= curDataSize;
+            }
+
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    File.WriteAllBytes(fbd.SelectedPath + "\\" +  fileName, data);
+                }
+            }
         }
         void addIncomming(string msg)
         {
@@ -159,12 +273,18 @@ namespace ChatApp
                             {
                                 addIncomming(receive);
                             }
-                            receive = bf.Decrypt(receive);
+
+                            if (BifidBtn.Checked)
+                                receive = bf.Decrypt(receive);
+                            else if (RCBtn.Checked)
+                                receive = rc.Decrypt(receive, iv);
                             addIncomming(receive);
 
                         });
                     }
                     receive = "";
+
+                    
                 }
                 catch(Exception ex)
                 {
@@ -190,12 +310,90 @@ namespace ChatApp
                 MessageBox.Show("Failed");
             }
 
+
+            if (fileClient.Connected)
+            {
+                if (n.Trim().Length != 0)
+                {
+                    panelContainer.Invoke((MethodInvoker)delegate ()
+                    {
+                        sendFileInfo();
+                        sendFile();
+                    });
+                }
+            }
+            else
+            {
+                MessageBox.Show("Failed");
+            }
+
             backgroundWorker2.CancelAsync();
         }
 
+        private void receiveFile_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            while (fileClient.Connected)
+            {
+                try
+                {
+                    rec = fileSTR.ReadLine();
+                    if (!string.IsNullOrEmpty(rec))
+                    {
+                        panelContainer.Invoke((MethodInvoker)delegate ()
+                        {
+                            size = int.Parse(rec.Substring(rec.LastIndexOf("|") + 1));
+                            fileName = rec.Substring(0, rec.IndexOf('|'));
+                            addIncomming(fileName);
+
+                            ReceiveFile();
+                        });
+                    }
+                    rec = "";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+            }
+        }
         private void rjToggleButton1_CheckedChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void uploadBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog
+            {
+                InitialDirectory = @"C:\",
+                Title = "Browse Text Files",
+
+                CheckFileExists = true,
+                CheckPathExists = true,
+
+                DefaultExt = "txt",
+                Filter = "txt files (*.txt)|*.txt",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+
+                ReadOnlyChecked = true,
+                ShowReadOnly = true
+            };
+
+            if(op.ShowDialog() == DialogResult.OK)
+            {
+                t = op.FileName;//cela putanja
+                FileInfo fi = new FileInfo(op.FileName);
+                n = fi.Name + "|" + fi.Length;
+
+                backgroundWorker2.RunWorkerAsync();
+            }
+
         }
     }
 }

@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.uploadBtn = new System.Windows.Forms.PictureBox();
+            this.RCBtn = new System.Windows.Forms.RadioButton();
+            this.BifidBtn = new System.Windows.Forms.RadioButton();
             this.rjToggleButton1 = new ChatApp.RJControls.RJToggleButton();
             this.closeButton = new System.Windows.Forms.PictureBox();
             this.siticonePanel1 = new Siticone.Desktop.UI.WinForms.SiticonePanel();
@@ -39,7 +42,9 @@
             this.panelContainer = new System.Windows.Forms.Panel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.receiveFile = new System.ComponentModel.BackgroundWorker();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.uploadBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.closeButton)).BeginInit();
             this.siticonePanel1.SuspendLayout();
             this.SuspendLayout();
@@ -47,17 +52,60 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(22)))), ((int)(((byte)(32)))));
+            this.panel1.Controls.Add(this.uploadBtn);
+            this.panel1.Controls.Add(this.RCBtn);
+            this.panel1.Controls.Add(this.BifidBtn);
             this.panel1.Controls.Add(this.rjToggleButton1);
             this.panel1.Controls.Add(this.closeButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(378, 79);
+            this.panel1.Size = new System.Drawing.Size(378, 78);
             this.panel1.TabIndex = 0;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
+            // 
+            // uploadBtn
+            // 
+            this.uploadBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.uploadBtn.Image = ((System.Drawing.Image)(resources.GetObject("uploadBtn.Image")));
+            this.uploadBtn.Location = new System.Drawing.Point(184, 13);
+            this.uploadBtn.Margin = new System.Windows.Forms.Padding(9, 8, 9, 8);
+            this.uploadBtn.Name = "uploadBtn";
+            this.uploadBtn.Size = new System.Drawing.Size(50, 54);
+            this.uploadBtn.TabIndex = 4;
+            this.uploadBtn.TabStop = false;
+            this.uploadBtn.Click += new System.EventHandler(this.uploadBtn_Click);
+            // 
+            // RCBtn
+            // 
+            this.RCBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.RCBtn.ForeColor = System.Drawing.Color.White;
+            this.RCBtn.Location = new System.Drawing.Point(107, 43);
+            this.RCBtn.Name = "RCBtn";
+            this.RCBtn.Size = new System.Drawing.Size(65, 24);
+            this.RCBtn.TabIndex = 3;
+            this.RCBtn.Tag = "alg";
+            this.RCBtn.Text = "RC6";
+            this.RCBtn.UseVisualStyleBackColor = true;
+            // 
+            // BifidBtn
+            // 
+            this.BifidBtn.Checked = true;
+            this.BifidBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BifidBtn.ForeColor = System.Drawing.Color.White;
+            this.BifidBtn.Location = new System.Drawing.Point(107, 13);
+            this.BifidBtn.Name = "BifidBtn";
+            this.BifidBtn.Size = new System.Drawing.Size(65, 24);
+            this.BifidBtn.TabIndex = 2;
+            this.BifidBtn.TabStop = true;
+            this.BifidBtn.Tag = "alg";
+            this.BifidBtn.Text = "Bifid";
+            this.BifidBtn.UseVisualStyleBackColor = true;
             // 
             // rjToggleButton1
             // 
@@ -153,10 +201,10 @@
             // 
             this.panelContainer.AutoScroll = true;
             this.panelContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContainer.Location = new System.Drawing.Point(0, 79);
+            this.panelContainer.Location = new System.Drawing.Point(0, 78);
             this.panelContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelContainer.Name = "panelContainer";
-            this.panelContainer.Size = new System.Drawing.Size(378, 469);
+            this.panelContainer.Size = new System.Drawing.Size(378, 470);
             this.panelContainer.TabIndex = 3;
             // 
             // backgroundWorker1
@@ -166,6 +214,10 @@
             // backgroundWorker2
             // 
             this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
+            // 
+            // receiveFile
+            // 
+            this.receiveFile.DoWork += new System.ComponentModel.DoWorkEventHandler(this.receiveFile_DoWork);
             // 
             // Form1
             // 
@@ -183,6 +235,7 @@
             this.Text = "ChatApp";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.uploadBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.closeButton)).EndInit();
             this.siticonePanel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -203,5 +256,9 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
         private RJControls.RJToggleButton rjToggleButton1;
+        private RadioButton RCBtn;
+        private RadioButton BifidBtn;
+        private PictureBox uploadBtn;
+        private System.ComponentModel.BackgroundWorker receiveFile;
     }
 }

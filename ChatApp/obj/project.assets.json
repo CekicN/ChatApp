@@ -186,11 +186,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Faks\\4.godina\\Zastita Informacija\\ChatApp\\ChatApp\\ChatApp.csproj",
+      "projectUniqueName": "C:\\Users\\Nikola\\Desktop\\Faks\\ChatApp\\ChatApp\\ChatApp.csproj",
       "projectName": "ChatApp",
-      "projectPath": "D:\\Faks\\4.godina\\Zastita Informacija\\ChatApp\\ChatApp\\ChatApp.csproj",
+      "projectPath": "C:\\Users\\Nikola\\Desktop\\Faks\\ChatApp\\ChatApp\\ChatApp.csproj",
       "packagesPath": "C:\\Users\\Nikola\\.nuget\\packages\\",
-      "outputPath": "D:\\Faks\\4.godina\\Zastita Informacija\\ChatApp\\ChatApp\\obj\\",
+      "outputPath": "C:\\Users\\Nikola\\Desktop\\Faks\\ChatApp\\ChatApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

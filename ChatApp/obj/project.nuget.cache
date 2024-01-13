@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "06A7ms9IzC3b6IJ8wHP53zmcSdD+BID2wFkIN1e/n/tZHhfa2lAC9rBskoy2V/cP/2gQpnQkZpjaiIDU+Rrydw==",
+  "dgSpecHash": "aLLQmmlBMj6G5H9NTrTzsuCWihJk1lcf8pA3C7hxLXFU03mIC/E1H680yE4OgYOXQrvjq1EoFTiIepZ+/Xu7yQ==",
   "success": true,
-  "projectFilePath": "D:\\Faks\\4.godina\\Zastita Informacija\\ChatApp\\ChatApp\\ChatApp.csproj",
+  "projectFilePath": "C:\\Users\\Nikola\\Desktop\\Faks\\ChatApp\\ChatApp\\ChatApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nikola\\.nuget\\packages\\guna.ui2.winforms\\2.0.1.4\\guna.ui2.winforms.2.0.1.4.nupkg.sha512",
     "C:\\Users\\Nikola\\.nuget\\packages\\siticone.desktop.ui\\2.1.1\\siticone.desktop.ui.2.1.1.nupkg.sha512",
